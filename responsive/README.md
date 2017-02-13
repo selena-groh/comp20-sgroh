@@ -1,7 +1,4 @@
-# COMP 20, Lab 4 - Responsive
-**modified by:** Selena Groh
-
-**modified on:** February 13, 2017
+# COMP 20: Lab 4 - Responsive
 
 ## Purpose
 to practice using sprites, CSS, media queries, and responsive design by displaying different parts of an image at different browser width ranges.
@@ -9,10 +6,10 @@ to practice using sprites, CSS, media queries, and responsive design by displayi
 ## Implementation
 All specifications were correctly implemented.
 
-### TIme Dedicated
+## Time Dedicated
 1 hour
         
-## ACknowledgements
+## Acknowledgements
 * Credit and thanks to the instructors and teaching assistants of Tufts COMP 20.
     
 ## References
