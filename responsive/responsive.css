@@ -1,1 +1,49 @@
 /* RESPONSIVE.CSS */
+
+@media only screen and (min-width: 1401px) {
+  .ralphy {
+    background: url(ralphy.gif) 0px 0px;
+    width: 250px;
+    height: 184px;
+  }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+  .ralphy {
+    background: url(ralphy.gif) 250px 0px;
+    width: 250px;
+    height: 184px;
+  }
+}
+
+@media only screen and (min-width: 1001px) and (max-width: 1200px) {
+  .ralphy {
+    background: url(ralphy.gif) 0px -184px;
+    width: 250px;
+    height: 188px;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1000px) {
+  .ralphy {
+    background: url(ralphy.gif) 250px -184px;
+    width: 250px;
+    height: 188px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+  .ralphy {
+    background: url(ralphy.gif) 0px -372px;
+    width: 250px;
+    height: 188px;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+  .ralphy {
+    background: url(ralphy.gif) 250px -372px;
+    width: 250px;
+    height: 188px;
+  } 
+}
