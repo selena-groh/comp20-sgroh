@@ -1,5 +1,6 @@
 /* RESPONSIVE.CSS */
 
+/* Yes, I love Lisa Simpson and when I grow up, I'm going to marry her. */
 @media only screen and (min-width: 1401px) {
   .ralphy {
     background: url(ralphy.gif) 0px 0px;
@@ -8,6 +9,7 @@
   }
 }
 
+/* No-o-o-o! */
 @media only screen and (min-width: 1201px) and (max-width: 1400px) {
   .ralphy {
     background: url(ralphy.gif) 250px 0px;
@@ -16,6 +18,7 @@
   }
 }
 
+/* Now, you listen to me! I don't like you! I never liked you! */
 @media only screen and (min-width: 1001px) and (max-width: 1200px) {
   .ralphy {
     background: url(ralphy.gif) 0px -184px;
@@ -24,6 +27,7 @@
   }
 }
 
+/* And the only reason I gave you that stupid valentine is 'cause nobody else would! */
 @media only screen and (min-width: 801px) and (max-width: 1000px) {
   .ralphy {
     background: url(ralphy.gif) 250px -184px;
@@ -32,6 +36,7 @@
   }
 }
 
+/* Watch this, Lise. You can actually pinpoint the second when his heart rips in half. */
 @media only screen and (min-width: 601px) and (max-width: 800px) {
   .ralphy {
     background: url(ralphy.gif) 0px -372px;
@@ -40,6 +45,7 @@
   }
 }
 
+/* Ralphy's heart rips in half. */
 @media only screen and (min-width: 0px) and (max-width: 600px) {
   .ralphy {
     background: url(ralphy.gif) 250px -372px;
