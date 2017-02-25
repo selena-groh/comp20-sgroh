@@ -14,7 +14,11 @@
 <div id="lyrics"></div>
 
 <script>
-	// Complete this section and create a CSS file named style.css
+  	var failvideo = document.getElementById("failvideo");
+	var lyrics    = document.getElementById("lyrics");
+	failvideo.addEventListener("timeupdate", function() {
+		console.log("Hi!");
+		}, false);
 </script>
 </body>
 </html>	
