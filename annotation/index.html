@@ -16,9 +16,10 @@
 <script>
   var vid    = document.getElementById("failvideo");
   var lyrics = document.getElementById("lyrics");
+  
   vid.addEventListener("timeupdate", function() {
     if (vid.currentTime < 9) {
-      lyrics.innerHTML = "<h3>Emotions | Mariah Carey</h3>";
+      lyrics.innerHTML = '<h3>Mariah Carey | "Emotions" | ' + "New Year's Eve 2016</h3>";
     }
     else if (vid.currentTime > 9 && vid.currentTime < 13) {
       lyrics.innerHTML = "<h3>You've got me feelin' emotions</h3>";
@@ -67,6 +68,9 @@
     }
     else if (vid.currentTime > 71 && vid.currentTime < 76) {
       lyrics.innerHTML = "<h3>Higher than the heavens above</h3>";
+    }
+    else if (vid.currentTime > 76) {
+      lyrics.innerHTML = "<h3>#RIP2016</h3>";
     }
     else {
       lyrics.innerHTML = "";
