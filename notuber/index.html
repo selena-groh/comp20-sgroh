@@ -2,17 +2,98 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 <title>The Black Car Service</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Raleway" rel="stylesheet" />
 </head>
 
 <body>
+  <div id="header">
+    <div id="header-text">
+      <h1>The Black Car Service</h1>
+      <h4>Get where you're going in style</h4>
+    </div>
+  </div>
   <div id="map"></div>
   <script>
     /* round function source: http://www.jacklmoore.com/notes/rounding-in-javascript */
     function round(value, decimals) {
       return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
     }
+    
+    function placeMarkers(map, icons, self, users) {
+      var infowindow = new google.maps.InfoWindow();
+
+      if (users.vehicles) {
+        self.type = "passenger";
+      } else if (users.passengers) {
+        self.type = "vehicle";
+      }
+
+      function addMarker(type, user) {
+        position = new google.maps.LatLng(user.lat, user.lng);
+        var marker = new google.maps.Marker({
+          position: position,
+          icon: icons[type],
+          map: map
+        });
+
+        if (position.lat() == self.position.lat() && position.lng() == self.position.lng()) {
+          marker.addListener('click', function() {
+            infowindow.setContent('<div id="infowindow">'+
+                                  '<h3>'+user.username+'</h3></div>');
+            infowindow.open(map, marker);
+          });
+          infowindow.setContent('<div id="infowindow">'+
+                                '<h3>'+user.username+'</h3></div>');
+          infowindow.open(map, marker);
+        }
+        else {
+          var distance = round(google.maps.geometry.spherical.computeDistanceBetween(position, self.position) * 0.000621371, 2);
+
+          marker.addListener('click', function() {
+            infowindow.setContent('<div id="infowindow">'+
+                                  '<h3>'+user.username+
+                                  ' ('+distance+' mi)</h3></div>');
+            infowindow.open(map, marker);
+          });
+        }
+      }
+
+      addMarker(self.type, self);
+      for (var i in users.passengers) {
+        addMarker('passenger', users.passengers[i]);
+      }
+
+      for (var i in users.vehicles) {
+        addMarker('vehicle', users.vehicles[i]);
+      }
+
+      map.setCenter(self.position);
+      map.setZoom(15);
+    }
+
+    function makeRequest(map, icons, self, placeMarkers) {
+      var request = new XMLHttpRequest();
+
+      request.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+          users = JSON.parse(request.responseText);
+          placeMarkers(map, icons, self, users);
+        }
+        else if (request.readyState == 4 && request.status != 200) {
+          alert("Error: XML request went wrong.");
+        }
+      };
+      request.send("username="+self.username+
+                   "&lat="+self.position.lat()+
+                   "&lng="+self.position.lng());
+    }
+    
     function initMap() {
       var usa = new google.maps.LatLng(37.0902, -95.7129);
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,58 +108,24 @@
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(25, 50)
         },
-        driver: {
+        vehicle: {
           url: "black_car.png",
           scaledSize: new google.maps.Size(50, 20),
           origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(25, 20) 
+          anchor: new google.maps.Point(25, 20)
         }
       };
-      
+            
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-          var selfPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          var self = {
+            username: 'bG3XpClP',
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+          };
           
-          var infowindow = new google.maps.InfoWindow();
-
-          function addMarker(user) {
-            var marker = new google.maps.Marker({
-              position: user.position,
-              icon: icons[user.type],
-              map: map
-            });
-            var distance = round(google.maps.geometry.spherical.computeDistanceBetween(marker.position, selfPos) * 0.000621371, 2);
-            if (distance == 0) {
-              marker.addListener('click', function() {
-                infowindow.setContent('<div id="infowindow"><p><b>Username: </b>'+user.name+ '</p>');
-                infowindow.open(map, marker);
-              });
-            } else {
-              marker.addListener('click', function() {
-                infowindow.setContent('<div id="infowindow"><p><b>Username: </b>'+user.name+ '</p><p><b>Distance: </b>'+distance+' mi</p>');
-                infowindow.open(map, marker);
-              });
-            }
-          }
-
-          var users = [
-            {
-              name: 'bG3XpClP',
-              position: selfPos,
-              type: 'passenger'
-            }, {
-              name: 'Elizabeth',
-              position: new google.maps.LatLng(42.4075, -71.1190),
-              type: 'driver'
-            }
-          ];
-
-          for (var i = 0, user; user = users[i]; i++) {
-            addMarker(user);
-          }
-
-          map.setCenter(selfPos);
-          map.setZoom(15);
+          makeRequest(map, icons, self, placeMarkers);
         }, function () {
           alert('Error: Geolocation failed.');
         });
