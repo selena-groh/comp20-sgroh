@@ -2,11 +2,80 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>The Black Car Service</title>
+<title>Fail</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
 
+<h1 id="title">Fail</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/fail.mp4" id="failvideo" controls></video>
+<div id="lyrics"></div>
+
+<script>
+  var vid    = document.getElementById("failvideo");
+  var lyrics = document.getElementById("lyrics");
+  
+  vid.addEventListener("timeupdate", function() {
+    if (vid.currentTime < 9) {
+      lyrics.innerHTML = '<h3>Mariah Carey | "Emotions" | ' + "New Year's Eve 2016</h3>";
+    }
+    else if (vid.currentTime > 9 && vid.currentTime < 13) {
+      lyrics.innerHTML = "<h3>You've got me feelin' emotions</h3>";
+    }
+    else if (vid.currentTime > 13 && vid.currentTime < 17) {
+      lyrics.innerHTML = "<h3>Deeper than I've ever dreamed of</h3>";
+    }
+    else if (vid.currentTime > 17 && vid.currentTime < 21) {
+      lyrics.innerHTML = "<h3>You've got me feelin' emotions</h3>";
+    }
+    else if (vid.currentTime > 21 && vid.currentTime < 26) {
+      lyrics.innerHTML = "<h3>Higher than the heavens above</h3>";
+    }
+    else if (vid.currentTime > 26 && vid.currentTime < 30) {
+      lyrics.innerHTML = "<h3>I feel good, I feel nice</h3>";
+    }
+    else if (vid.currentTime > 30 && vid.currentTime < 34) {
+      lyrics.innerHTML = "<h3>I've never felt so satisfied</h3>";
+    }
+    else if (vid.currentTime > 34 && vid.currentTime < 38) {
+      lyrics.innerHTML = "<h3>I'm in love, I'm alive</h3>";
+    }
+    else if (vid.currentTime > 38 && vid.currentTime < 43) {
+      lyrics.innerHTML = "<h3>Intoxicated, flyin' high</h3>";
+    }
+    else if (vid.currentTime > 43 && vid.currentTime < 46) {
+      lyrics.innerHTML = "<h3>Feels like a dream</h3>";
+    }
+    else if (vid.currentTime > 46 && vid.currentTime < 51) {
+      lyrics.innerHTML = "<h3>When you touch me tenderly</h3>";
+    }
+    else if (vid.currentTime > 51 && vid.currentTime < 54.5) {
+      lyrics.innerHTML = "<h3>I don't know if it's real</h3>";
+    }
+    else if (vid.currentTime > 54.5 && vid.currentTime < 59) {
+      lyrics.innerHTML = "<h3>But I like the way I feel inside</h3>";
+    }
+    else if (vid.currentTime > 59 && vid.currentTime < 63) {
+      lyrics.innerHTML = "<h3>You've got me feelin' emotions</h3>";
+    }
+    else if (vid.currentTime > 63 && vid.currentTime < 67) {
+      lyrics.innerHTML = "<h3>Deeper than I've ever dreamed of</h3>";
+    }
+    else if (vid.currentTime > 67 && vid.currentTime < 71) {
+      lyrics.innerHTML = "<h3>You've got me feelin' emotions</h3>";
+    }
+    else if (vid.currentTime > 71 && vid.currentTime < 76) {
+      lyrics.innerHTML = "<h3>Higher than the heavens above</h3>";
+    }
+    else if (vid.currentTime > 76) {
+      lyrics.innerHTML = "<h3>#RIP2016</h3>";
+    }
+    else {
+      lyrics.innerHTML = "";
+    }
+  }, false);
+</script>
 </body>
 </html>	
