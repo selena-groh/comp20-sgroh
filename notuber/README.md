@@ -4,7 +4,7 @@
 to enhance understanding of JSON APIs, third-party JavaScript APIs, HTML5 Geolocation, and XMLHttpRequest by creating a ride request application
 
 ## Implementation
-INSERT IMPLEMENTATION DESCRIPTION HERE
+All specifications were correctly implemented; however, future improvements might include the ability to request and accept rides, a payment framework, a list of past rides, and enhanced headers and footers with contact information and social media links.
 
 ## Time Dedicated
 6 hours
