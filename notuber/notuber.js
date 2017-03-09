@@ -18,30 +18,30 @@ function placeMarkers(map, icons, self, users) {
         icon: icons[type],
         map: map
       }),
-      distance = 0;
+      dist = 0,
+      content = "";
 
-    if (position.lat() === self.position.lat() && position.lng() === self.position.lng()) {
-      marker.addListener('click', function () {
-        infowindow.setContent('<div id="infowindow">' +
-                              '<h3>' + user.username + '</h3></div>');
-        infowindow.open(map, marker);
-      });
-      infowindow.setContent('<div id="infowindow">' +
-                            '<h3>' + user.username + '</h3></div>');
+    if (type === "self") {
+      content = '<div id="infowindow">' + '<h3>' + user.username + '</h3></div>';
+      infowindow.setContent(content);
       infowindow.open(map, marker);
     } else {
-      distance = round(google.maps.geometry.spherical.computeDistanceBetween(position, self.position) * 0.000621371, 2);
-
-      marker.addListener('click', function () {
-        infowindow.setContent('<div id="infowindow">' +
-                              '<h3>' + user.username +
-                              ' (' + distance + ' mi)</h3></div>');
-        infowindow.open(map, marker);
-      });
+      dist = google.maps.geometry.spherical.computeDistanceBetween(position, self.position);
+      dist = round(dist * 0.000621371, 2);
+      
+      content = '<div id="infowindow">' +
+                '<h3>' + user.username +
+                ' ('   + dist + ' mi)</h3></div>';
     }
+    
+    marker.addListener('click', function () {
+      infowindow.setContent(content);
+      infowindow.open(map, marker);
+    });
   }
 
   addMarker(self.type, self);
+  
   if (users.passengers) {
     for (i = 0; i < users.passengers.length; i += 1) {
       addMarker('passenger', users.passengers[i]);
@@ -60,13 +60,14 @@ function placeMarkers(map, icons, self, users) {
 
 function makeRequest(map, icons, self, placeMarkers) {
   "use strict";
-  var request = new XMLHttpRequest();
+  var request = new XMLHttpRequest(),
+    parameters = "";
 
   request.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
   request.onreadystatechange = function () {
-    var users, alert;
+    var users;
     
     if (request.readyState === 4 && request.status === 200) {
       users = JSON.parse(request.responseText);
@@ -75,9 +76,11 @@ function makeRequest(map, icons, self, placeMarkers) {
       alert("Error: XML request went wrong.");
     }
   };
-  request.send("username=" + self.username +
-               "&lat=" + self.position.lat() +
-               "&lng=" + self.position.lng());
+  
+  parameters = "username=" + self.username +
+               "&lat="     + self.position.lat() +
+               "&lng="     + self.position.lng();
+  request.send(parameters);
 }
 
 function initMap() {
@@ -90,9 +93,9 @@ function initMap() {
     icons = {
       passenger: {
         url: "passenger.png",
-        scaledSize: new google.maps.Size(50, 50),
+        scaledSize: new google.maps.Size(30, 50),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(25, 50)
+        anchor: new google.maps.Point(15, 50)
       },
       vehicle: {
         url: "black_car.png",
@@ -100,8 +103,8 @@ function initMap() {
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(25, 20)
       },
-      user: {
-        url: "user_icon.png",
+      self: {
+        url: "self.png",
         scaledSize: new google.maps.Size(50, 40),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(25, 20)
@@ -112,16 +115,16 @@ function initMap() {
       lat: 0,
       lng: 0,
       position: new google.maps.LatLng(0, 0),
-      type: "user"
-    },
-    alert;
+      type: "self"
+    };
     
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       self.lat = position.coords.latitude;
       self.lng = position.coords.longitude;
-      self.position = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      self.position = new google.maps.LatLng(position.coords.latitude,
+                                             position.coords.longitude);
 
       makeRequest(map, icons, self, placeMarkers);
     }, function () {
