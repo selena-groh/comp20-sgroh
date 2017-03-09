@@ -7,7 +7,7 @@ to enhance understanding of JSON APIs, third-party JavaScript APIs, HTML5 Geoloc
 All specifications were correctly implemented; however, future improvements might include the ability to request and accept rides, a payment framework, a list of past rides, and enhanced headers and footers with contact information and social media links.
 
 ## Time Dedicated
-6 hours
+7 hours
 
 ## Acknowledgements
 * Credit and thanks to the instructors and teaching assistants of Tufts COMP 20.
