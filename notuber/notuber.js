@@ -63,7 +63,7 @@ function makeRequest(map, icons, self, placeMarkers) {
   var request = new XMLHttpRequest(),
     parameters = "";
 
-  request.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
+  request.open("POST", "https://salty-harbor-98104.herokuapp.com/submit", true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
   request.onreadystatechange = function () {
