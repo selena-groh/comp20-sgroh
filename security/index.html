@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
   <title>Security and Privacy Assessment</title>
   <link rel="stylesheet" href="style.css" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Raleway" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Raleway|Inconsolata" rel="stylesheet" />
 </head>
 
 <body>
@@ -16,26 +16,85 @@
     </div>
   </div>
   <div id="main">
-    <h3>Introduction</h3>
-      <p>Provide a description of the product and what you were hired to do.</p>
-    <h3>Methodology</h3>
-      <p>Describe your methodology when testing the application, including the tools that you used.</p>
-    <h3>Abstract of Findings</h3>
+    <div>
+      <h3>Introduction</h3>
+      <p><a href="https://defense-in-derpth.herokuapp.com/">The Black Car Service</a> allows the client (a passenger or a vehicle) to submit their location to a server and view the location of the passengers or vehicles (whichever is opposite of the client's type) who have checked in in the last five minutes. It is the purpose of this report to find, document, and resolve security and privacy issues of this application. <a href="https://defense-in-derpth.herokuapp.com/">My partner's implementation</a> returns an Internal Server Error. As such, this report analyzes <a href="https://d1b10bmlvqabco.cloudfront.net/attach/ixf77pqbt8z7pj/hbzpuemmwrz3b0/j1v54uzc17ga/server.js">Ming Chow's implementation</a> of The Black Car Service.</p>
+    </div>
+    <div>
+      <h3>Methodology</h3>
+      <p>First, I examined the server-side code for the application (server.js). I noticed certain validating checks which the creator had implemented, such as boundary checks for the client-submitted latitude and longitude values. I then used <a href="https://www.getpostman.com/">Postman</a> to submit unconventional parameters to the application in order to test the application's handling of unexpected and malicious values.</p>
+    </div>
+    <div>
+      <h3>Abstract of Findings</h3>
       <p>Provide an overview of all the security and privacy issues you identified. This section should be written for non-technical managers who do not have technical expertise and do not have time to read the entire document. Write this section using lay language.</p>
-    <h3>Issues Found and Technical Analysis Thereof</h3>
-      <h4>For each issue:</h4>
+    </div>
+    <div>
+      <h3>Issues Found and Technical Analysis Thereof</h3>
+      <h4>Cross-Site Scripting (XSS)</h4>
       <ul>
-        <li>Issue (e.g. database injection, really bad programming practice)</li>
-        <li>Location or page where issue was found</li>
-        <li>Severity of issue (e.g. low, medium, or high). Justify your answer.</li>
-        <li>Description of issue. How did you find it? A screenshot of problem is excellent.</li>
-        <li>Proof of vulnerability. Show pictures or it didn't happen.</li>
-        <li>Resolution. Make recommendation(s) on how issue can be resolved. Show code if possible.</li>
+        <li><em>Location:</em> <a href="https://defense-in-derpth.herokuapp.com/submit">https://defense-in-derpth.herokuapp.com/submit</a></li>
+        <li><em>Severity:</em> high as any malicious JavaScript, if submitted to the app's /submit path, will be run at <a href="https://defense-in-derpth.herokuapp.com/">https://defense-in-derpth.herokuapp.com/</a></li>
+        <li><em>Description:</em> Using Postman, I discovered that, when sending parameters to <a href="https://defense-in-derpth.herokuapp.com/submit">https://defense-in-derpth.herokuapp.com/submit</a> using the POST method, submitting Javascript as the value for the key username will cause <a href="https://defense-in-derpth.herokuapp.com/">https://defense-in-derpth.herokuapp.com/</a> to run said JavaScript upon page load.</li>
+        <li style="list-style: none">
+          <figure>
+            <img src="images/xss_submit.png" alt="XSS submission has JavaScript as username value"/>
+            <figcaption>POSTing the JavaScript to /submit using Postman</figcaption>
+          </figure>
+        </li>
+        <li style="list-style: none">
+          <figure>
+            <img src="images/xss_home.png" alt="XSS proof is an alert box on The Black Car Service homepage"/>
+            <figcaption>JavaScript being executed at homepage</figcaption>
+          </figure>
+        </li>
+        <li><em>Resolution:</em> User-inputted values should be cleaned of angle brackets to prevent XSS. The symbol &lt; should be changed to <CODE>&amp;lt;</CODE> and the symbol &gt; should be changed to <CODE>&amp;gt;</CODE>. Examples on how to do this can be found <a href="http://stackoverflow.com/questions/5251520/how-do-i-escape-some-html-in-javascript">here</a>.</li>
       </ul>
-    <h3>Conclusion</h3>
-      <p>You can also list future considerations and reommendations with costs.</p>
-    <h3>References</h3>
-      <p>A list of references and links that you used for your work.</p>
+      
+      <h4>MongoDB Injection</h4>
+      <ul>
+        <li><em>Location:</em> <a href="https://defense-in-derpth.herokuapp.com/vehicle.json">https://defense-in-derpth.herokuapp.com/vehicle.json</a></li>
+        <li><em>Severity:</em> high as this privacy concern allows the client to see the location of a username which is not their own</li>
+        <li><em>Description:</em> Using Postman, I discovered that, when sending the username parameter to <a href="https://defense-in-derpth.herokuapp.com/vehicle.json">https://defense-in-derpth.herokuapp.com/vehicle.json</a> using the GET method, adding [$ne] to the end of the username key will cause the server to return one record which does not have the same username value as the one submitted. To the implementer's credit, he used the findOne() function rather than find(), which limits the number of other users' information I receive to one.</li>
+        <li style="list-style: none">
+          <figure>
+            <img src="images/injection.png" alt="using username[$ne] as the key rather than username"/>
+          </figure>
+        </li>
+        <li><em>Resolution:</em> In order to prevent MongoDB database injection, the input must be validated. The customer must either use middleware such as <script src="https://gist.github.com/vdeturckheim/7c46c243f337c11eeea4d73782f33a13.js"></script> or use a library with a wrapper such as <a href="https://github.com/continuationlabs/celebrate">Celebrate</a>, as in <script src="https://gist.github.com/vdeturckheim/cb55c6b06f85f483b5eccc6b2df479de.js"></script></li>
+      </ul>
+      <h4>Data Validation</h4>
+      <ul>
+        <li><em>Location:</em> <a href="https://defense-in-derpth.herokuapp.com/submit">https://defense-in-derpth.herokuapp.com/submit</a></li>
+        <li><em>Severity:</em> medium as <a href="https://defense-in-derpth.herokuapp.com/">https://defense-in-derpth.herokuapp.com/</a> will display any HTML submitted as the username value to the app's /submit path</li>
+        <li><em>Description:</em> Using Postman, I discovered that, when sending parameters to <a href="https://defense-in-derpth.herokuapp.com/submit">https://defense-in-derpth.herokuapp.com/submit</a> using the POST method, submitting HTML as the value for the key username will cause <a href="https://defense-in-derpth.herokuapp.com/">https://defense-in-derpth.herokuapp.com/</a> to display said HTML upon page load.</li>
+        <li style="list-style: none">
+          <figure>
+            <img src="images/validation_submit.png" alt="Submission has HTML as username value"/>
+            <figcaption>POSTing the HTML to /submit using Postman</figcaption>
+          </figure>
+        </li>
+        <li style="list-style: none">
+          <figure>
+            <img src="images/validation_home.png" alt="Validation failure proof is a GIF of puppies on The Black Car Service homepage"/>
+            <figcaption>Submitted HTML (in this case, a GIF of puppies on a treadmill) is displayed on the homepage</figcaption>
+          </figure>
+        </li>
+        <li><em>Resolution:</em> User-inputted values for usernames should be validated to be strings which do not contain HTML. If the strings contain special characters not otherwise found in valid usernames, such as &lt; or &gt;, the username should not be considered valid and should therefore not be inserted into the database.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Conclusion</h3>
+      <p>The primary issues associated with this implementation concern client-input validation. We can never trust user input, and therefore every value submitted by the client must be sanitized and validated. The current application validates latitude and longitude values to be within a certain range. This sort of validation should be expanded to the username field, namely by removing special characters, by rejecting usernames with characters not appearing in valid usernames, and/or by whitelisting usernames. Future work should also prevent database injection through the use of middleware or a library. Though adding an additional library would increase the complexity of the application and slow down performance, it is necessary to prevent users from viewing data which is not their own.</p>
+    </div>
+    <div>
+      <h3>References</h3>
+      <ul>
+        <li><a href="http://blog.securelayer7.net/mongodb-security-injection-attacks-with-php/">MongoDB Injection Attacks with PHP</a></li>
+        <li><a href="https://blog.sqreen.io/mongodb-will-not-prevent-nosql-injections-in-your-node-js-app/">MongoDB Injection and Node.js</a></li>
+        <li><a href="https://blog.sqreen.io/prevent-nosql-injections-mongodb-node-js/">Preventing MongoDB Injection in Node.js</a></li>
+        <li><a href="https://gist.github.com/mchow01/49f8979829f1c488d922">COMP 20 MongoDB Request Injection Attack in Node.js</a></li>
+      </ul>
+    </div>
   </div>
   <div id="footer">
     <div id="footer-text">

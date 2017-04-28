@@ -4,13 +4,14 @@
 to perform a security assessment on a potentially vulnerable web application.
 
 ## Implementation
---ADD IMPLEMENTATION DETAILS HERE--
+All aspects were correctly documented and implemented.
 
 ## Time Dedicated
-0.5 hours
+3 hours
         
 ## Acknowledgements
 * Credit and thanks to the instructors and teaching assistants of Tufts COMP 20.
+* I discussed aspects of this assignment with Caroline Sheng in general terms.
     
 ## References
-* [Link](#)
+* See the References section of index.html
