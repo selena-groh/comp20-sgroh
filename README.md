@@ -5,7 +5,7 @@ This repository is a record of my journey in learning how to develop, design, an
 
 ## Assignments and Labs
 * [Assignment 2: The Black Car Service](https://selena-groh.github.io/comp20-sgroh/notuber-client)
-* [Assignment 3: The Server for The Black Car Service](https://selena-groh.github.io/comp20-sgroh/notuber-server)
+* [Assignment 3: The Server for The Black Car Service](https://salty-harbor-98104.herokuapp.com)
 * [Assignment 4: Security and Privacy](https://selena-groh.github.io/comp20-sgroh/security)
 * [Lab 4: Responsive](https://selena-groh.github.io/comp20-sgroh/responsive)
 * [Lab 5: Annotation](https://selena-groh.github.io/comp20-sgroh/annotation)
