@@ -21,4 +21,4 @@ At the beginning of this course, I had just finished COMP40. During COMP40, we w
 Coming into this course, I knew some HTML and CS but no JavaScript or databases. Though I really enjoy front-end development, I feel I learned a lot about the back-end and security which will be very beneficial in the future. In particular, I hadn't realized previously how vulnerable so many applications are to attacks. In addition, I don't always remember validation and error-checking when I program, so having that knowledge of vulnerabilities will help me secure my work in the future.
 
 ## Topics for Future Education
-I'm very eager to learn more about graphics. For our semester group project, we implemeneted the graphics using canva.js. As I'm interested in design and front-end development, building my knowledge base for animations would be really beneficial and interesting.
+I'm very eager to learn more about graphics. For our semester group project, we implemeneted the graphics using crafty.js. As I'm interested in design and front-end development, building my knowledge base for animations would be really beneficial and interesting.
