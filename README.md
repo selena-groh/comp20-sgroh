@@ -4,7 +4,8 @@
 This repository is a record of my journey in learning how to develop, design, and secure web content. Its purpose is to host this work to be assessed by my instructors, reviewed by myself, and appraised by potential employers.
 
 ## Assignments and Labs
-* [Assignment 2: The Black Car Service](https://selena-groh.github.io/comp20-sgroh/notuber)
+* [Assignment 2: The Black Car Service](https://selena-groh.github.io/comp20-sgroh/notuber-client)
+* [Assignment 3: The Server for The Black Car Service](https://selena-groh.github.io/comp20-sgroh/notuber-server)
 * [Assignment 4: Security and Privacy](https://selena-groh.github.io/comp20-sgroh/security)
 * [Lab 4: Responsive](https://selena-groh.github.io/comp20-sgroh/responsive)
 * [Lab 5: Annotation](https://selena-groh.github.io/comp20-sgroh/annotation)
