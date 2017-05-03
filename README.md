@@ -4,11 +4,11 @@
 This repository is a record of my journey in learning how to develop, design, and secure web content. Its purpose is to host this work to be assessed by my instructors, reviewed by myself, and appraised by potential employers.
 
 ## Assignments and Labs
-* [Assignment 2: The Black Car Service](/notuber)
-* [Assignment 4: Security and Privacy](/security)
-* [Lab 4: Responsive](/responsive)
-* [Lab 5: Annotation](/annotation)
-* [Lab 7: Messages](/messages)
+* [Assignment 2: The Black Car Service](/comp20-sgroh/notuber)
+* [Assignment 4: Security and Privacy](/comp20-sgroh/security)
+* [Lab 4: Responsive](/comp20-sgroh/responsive)
+* [Lab 5: Annotation](/comp20-sgroh/annotation)
+* [Lab 7: Messages](/comp20-sgroh/messages)
 
 ## Favorite Assignment
 My favorite assignment was Assignment 2: The Black Car Service. Though I had some prior interaction with the Google Maps API, my past experience was confusing and frustrating. It was very rewarding to be able to use this tool which had previously perplexed me and create a useful and well-designed application. In addition, I love designing webpages with CSS, so being able to do so with a fleshed out application was really enjoyable.
