@@ -28,11 +28,12 @@ em {
 }
 
 li {
-  padding-bottom: 6px;
+  margin-bottom: 16px;
 }
 
 li p {
   margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 CODE {
