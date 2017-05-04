@@ -1,0 +1,100 @@
+/* STYLE.CSS */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway";
+}
+
+h1 {
+  font-family: "Dancing Script";
+}
+
+h3 {
+  color: #DC143C;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #DC143C;
+}
+
+a {
+  color: crimson;
+  text-decoration: none;
+}
+
+em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+li {
+  padding-bottom: 6px;
+}
+
+li p {
+  margin-top: 0px;
+}
+
+CODE {
+  font-family: Inconsolata, monospace;
+}
+
+figure {
+  text-align: center;
+}
+
+figure img {
+  width: 100%;
+  max-width: 1000px;
+}
+
+figcaption {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+#header {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#header, h1 {
+  text-align: center;
+  background-color: crimson;
+  margin: 0 auto;
+  color: white;
+}
+
+#header h4 {
+  text-align: center;
+  background-color: crimson;
+  margin: 0 auto;
+  color: white;
+}
+
+#main {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 80%;
+  margin: auto;
+}
+
+#footer {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: crimson;
+  margin: 0 auto;
+  color: white;
+}
+
+#footer h5 {
+  text-align: center;
+  background-color: crimson;
+  margin: 0 auto;
+  color: white;
+}

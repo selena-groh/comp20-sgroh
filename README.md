@@ -4,6 +4,7 @@
 This repository is a record of my journey in learning how to develop, design, and secure web content. Its purpose is to host this work to be assessed by my instructors, reviewed by myself, and appraised by potential employers.
 
 ## Assignments and Labs
+* [Semester Project: Float-Four](https://float-four.herokuapp.com)
 * [Assignment 2: The Black Car Service](https://selena-groh.github.io/comp20-sgroh/notuber-client)
 * [Assignment 3: The Server for The Black Car Service](https://salty-harbor-98104.herokuapp.com)
 * [Assignment 4: Security and Privacy](https://selena-groh.github.io/comp20-sgroh/security)
@@ -21,4 +22,4 @@ At the beginning of this course, I had just finished COMP40. During COMP40, we w
 Coming into this course, I knew some HTML and CS but no JavaScript or databases. Though I really enjoy front-end development, I feel I learned a lot about the back-end and security which will be very beneficial in the future. In particular, I hadn't realized previously how vulnerable so many applications are to attacks. In addition, I don't always remember validation and error-checking when I program, so having that knowledge of vulnerabilities will help me secure my work in the future.
 
 ## Topics for Future Education
-I'm very eager to learn more about graphics. For our semester group project, we implemeneted the graphics using crafty.js. As I'm interested in design and front-end development, building my knowledge base for animations would be really beneficial and interesting.
+I'm very eager to learn more about graphics. For our semester group project, we implemented the graphics using crafty.js. As I'm interested in design and front-end development, building my knowledge base for animations would be really beneficial and interesting.
